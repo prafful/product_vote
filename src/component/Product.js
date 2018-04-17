@@ -3,6 +3,16 @@ import '../index.css'
 
 class Product extends React.Component {
 
+    constructor(props){
+        super(props)
+        this.doUpVote = this.doUpVote.bind(this);
+    }
+
+
+    doUpVote(){
+        this.props.onUpVote(this.props.id);
+    }
+
     render() {
         return (
             <div className='item'>
@@ -11,7 +21,7 @@ class Product extends React.Component {
                 </div>
                 <div className='middle aligned content'>
                     <div className='header'>
-                        <a>
+                        <a onClick={this.doUpVote}>
                             <i className='large caret up icon'/>
                         </a>
                         {this.props.votes}

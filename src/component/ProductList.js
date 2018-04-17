@@ -5,6 +5,10 @@ import data from '../seed.json'
 
 class ProductList extends React.Component{
 
+    upVote(productId){
+        console.log("UpVote Called for " + productId) 
+    }
+
     getRandomVote = function(){
         return Math.floor((Math.random() * 50) + 15);
     }
@@ -31,8 +35,7 @@ class ProductList extends React.Component{
                 votes = {product.votes}
                 avatar = {product.submitterAvatarUrl}
                 image={product.productImageUrl}
-              
-
+                onUpVote={this.upVote}
             />
                 
             );
