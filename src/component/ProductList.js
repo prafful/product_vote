@@ -5,8 +5,22 @@ import data from '../seed.json'
 
 class ProductList extends React.Component{
 
+    getRandomVote = function(){
+        return Math.floor((Math.random() * 50) + 15);
+    }
+
     renderProducts = function(){
-        return data.map((product)=>{
+
+        let newProducts = data.map((p)=>{
+            p.votes = this.getRandomVote();
+            return p;
+        });
+
+        newProducts = newProducts.sort((a,b) =>{
+            return (b.votes -a.votes);
+        });
+
+        return newProducts.map((product)=>{
             return (
                 <Product 
                 key = {product.id}
@@ -17,6 +31,8 @@ class ProductList extends React.Component{
                 votes = {product.votes}
                 avatar = {product.submitterAvatarUrl}
                 image={product.productImageUrl}
+              
+
             />
                 
             );
@@ -24,7 +40,9 @@ class ProductList extends React.Component{
     }
 
     render(){
-        const product = data[0];
+        console.log("Called Once")
+        //console.log(this.state.productsData);
+        //this.generateVote()
         return(
             <div>
                {this.renderProducts()}
