@@ -17,8 +17,20 @@ class ProductList extends React.Component{
 
 
     upVote(productId){
-        console.log("UpVote Called for " + productId) 
+        console.log("UpVote Called for " + productId)
+        const newProducts = this.state.newData.map((p)=>{
+            if(p.id === productId){
+                return Object.assign({}, p, {votes:p.votes+1});
+            }else{
+                return p;
+            }
+        });
+
+        this.setState({newData:newProducts})
+        console.log(this.state.newData)
         
+        
+
    }
 
     getRandomVote = function(){
@@ -26,8 +38,10 @@ class ProductList extends React.Component{
     }
 
     renderProducts = function(){
-
-        return this.state.newData.map((product)=>{
+        let newSortedData = this.state.newData.sort((a, b)=>{
+            return b.votes  - a.votes
+        })
+        return newSortedData.map((product)=>{
             return (
                 <Product 
                 key = {product.id}
@@ -62,9 +76,9 @@ class ProductList extends React.Component{
 
     }
 
-    componentDidMount(){
+   
+    componentDidUpdate(){
        
-        
     }
 
     render(){
